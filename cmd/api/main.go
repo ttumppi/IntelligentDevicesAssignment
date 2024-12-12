@@ -59,7 +59,7 @@ func main() {
 
 	// * Start the server *
 	logger.Println("Starting server on :8080...")
-	if err := server.ListenAndServe(":8080"); err != nil {
+	if err := server.ListenAndServe("0.0.0.0:8080"); err != nil {
 		// If the server was shutdown gracefully, don't log a startup error
 		if err != http.ErrServerClosed {
 			logger.Println("Server startup error:", err)
