@@ -71,7 +71,7 @@ func TestPostSuccessful(t *testing.T) {
 
 	dataJSON, _ := json.Marshal(models.Data{
 		ID:          1,
-		Message:    "Test  message",
+		Message:    "Test message",
 		
 	})
 
@@ -88,7 +88,7 @@ func TestPostSuccessful(t *testing.T) {
 	}
 
 	// * Check the response body
-	expected := `{"id":1,"device_id":"device1","device_name":"device1","value":1,"type":"type1","date_time":"2021-01-01 00:00:00","description":"description1"}`
+	expected := `{"id":1,"message":"Test message"}`
 	if strings.TrimSpace(rr.Body.String()) != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v", rr.Body.String(), expected)
 	}

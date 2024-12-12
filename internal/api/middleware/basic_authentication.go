@@ -64,5 +64,5 @@ func BasicAuthenticationMiddleware(next http.Handler) http.Handler {
 func validateUser(username, password string) bool {
 
 	// ! This is a dummy implementation, replace this with real authentication logic
-	return username == "admin" && password == "password"
+	return username == "secretUser" && password == "GoVeryNice>:("
 }

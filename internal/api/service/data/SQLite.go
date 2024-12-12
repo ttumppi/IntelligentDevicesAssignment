@@ -58,7 +58,7 @@ func (ds *DataServiceSQLite) Delete(data *models.Data, ctx context.Context) (int
 
 func (ds *DataServiceSQLite) ValidateData(data *models.Data) error {
 	var errMsg string
-	if data.Message == "" || len(data.Message) > 50 {
+	if data.Message == "" || len(data.Message) > 255 {
 		errMsg += "Message is required and must be less than 50 characters. "
 	}
 	

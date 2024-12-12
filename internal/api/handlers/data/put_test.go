@@ -34,7 +34,7 @@ func TestPutInvalidRequestBody(t *testing.T) {
 
 func TestPutHandlerError(t *testing.T) {
 
-	req, err := http.NewRequest("PUT", "/data", strings.NewReader(`{"id": 1, "device_id": "device_id", "device_name": "device_name", "value": 1.0, "type": "type", "date_time": "2020-01-01T00:00:00Z", "description": "description"}`))
+	req, err := http.NewRequest("PUT", "/data", strings.NewReader(`{"id": 1, "message": "Test Message"}`))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -54,7 +54,7 @@ func TestPutHandlerError(t *testing.T) {
 
 func TestPutDataNotFound(t *testing.T) {
 
-	req, err := http.NewRequest("PUT", "/data", strings.NewReader(`{"id": 1, "device_id": "device_id", "device_name": "device_name", "value": 1.0, "type": "type", "date_time": "2020-01-01T00:00:00Z", "description": "description"}`))
+	req, err := http.NewRequest("PUT", "/data",strings.NewReader(`{"id": 1, "message": "Test Message"}`))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -74,7 +74,7 @@ func TestPutDataNotFound(t *testing.T) {
 
 func TestPutHandlerSuccess(t *testing.T) {
 
-	req, err := http.NewRequest("PUT", "/data", strings.NewReader(`{"id": 1, "device_id": "device_id", "device_name": "device_name", "value": 1.0, "type": "type", "date_time": "2020-01-01T00:00:00Z", "description": "description"}`))
+	req, err := http.NewRequest("PUT", "/data", strings.NewReader(`{"id": 1, "message": "Test Message"}`))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -86,7 +86,7 @@ func TestPutHandlerSuccess(t *testing.T) {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
 	}
 
-	expected := `{"id":1,"device_id":"device_id","device_name":"device_name","value":1,"type":"type","date_time":"2020-01-01T00:00:00Z","description":"description"}`
+	expected := `{"id":1,"message":"Test Message"}`
 	if strings.TrimSpace(rr.Body.String()) != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v", rr.Body.String(), expected)
 	}
