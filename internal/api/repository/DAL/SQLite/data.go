@@ -87,7 +87,7 @@ func Close(ctx context.Context, r *DataRepository) {
 
 func (r *DataRepository) Create(data *models.Data, ctx context.Context) error {
 
-	res, err := r.createStmt.ExecContext(ctx, data.DeviceID, data.DeviceName, data.Value, data.Type, data.DateTime, data.Description)
+	res, err := r.createStmt.ExecContext(ctx, data.Message)
 	if err != nil {
 		return err
 	}
@@ -102,7 +102,7 @@ func (r *DataRepository) Create(data *models.Data, ctx context.Context) error {
 func (r *DataRepository) ReadOne(id int, ctx context.Context) (*models.Data, error) {
 	row := r.readStmt.QueryRowContext(ctx, id)
 	var data models.Data
-	err := row.Scan(&data.ID, &data.DeviceID, &data.DeviceName, &data.Value, &data.Type, &data.DateTime, &data.Description)
+	err := row.Scan(&data.ID, &data.Message)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
@@ -128,7 +128,7 @@ func (r *DataRepository) ReadMany(page int, rowsPerPage int, ctx context.Context
 	var data []*models.Data
 	for rows.Next() {
 		var d models.Data
-		err := rows.Scan(&d.ID, &d.DeviceID, &d.DeviceName, &d.Value, &d.Type, &d.DateTime, &d.Description)
+		err := rows.Scan(&d.ID, &d.Message)
 		if err != nil {
 			return nil, err
 		}
@@ -138,7 +138,7 @@ func (r *DataRepository) ReadMany(page int, rowsPerPage int, ctx context.Context
 }
 
 func (r *DataRepository) ReadAll() ([]*models.Data, error) {
-	rows, err := r.sqlDB.QueryContext(context.Background(), "SELECT id, device_id, device_name, value, data_type, date_time, description FROM data")
+	rows, err := r.sqlDB.QueryContext(context.Background(), "SELECT id, message FROM messages")
 	if err != nil {
 		return nil, err
 	}
@@ -147,7 +147,7 @@ func (r *DataRepository) ReadAll() ([]*models.Data, error) {
 	var data []*models.Data
 	for rows.Next() {
 		var d models.Data
-		err := rows.Scan(&d.ID, &d.DeviceID, &d.DeviceName, &d.Value, &d.Type, &d.DateTime, &d.Description)
+		err := rows.Scan(&d.ID, &d.Message)
 		if err != nil {
 			return nil, err
 		}
@@ -157,7 +157,7 @@ func (r *DataRepository) ReadAll() ([]*models.Data, error) {
 }
 
 func (r *DataRepository) Update(data *models.Data, ctx context.Context) (int64, error) {
-	res, err := r.updateStmt.ExecContext(ctx, data.DeviceID, data.DeviceName, data.Value, data.Type, data.DateTime, data.Description, data.ID)
+	res, err := r.updateStmt.ExecContext(ctx, data.Message, data.ID)
 	if err != nil {
 		return 0, err
 	}

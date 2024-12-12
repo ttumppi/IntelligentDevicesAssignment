@@ -4,12 +4,8 @@ import "context"
 
 type Data struct {
 	ID          int     `json:"id"`
-	DeviceID    string  `json:"device_id"`
-	DeviceName  string  `json:"device_name"`
-	Value       float64 `json:"value"`
-	Type        string  `json:"type"`
-	DateTime    string  `json:"date_time"`
-	Description string  `json:"description"`
+	Message    string  `json:"message"`
+	
 }
 
 type DataRepository interface {

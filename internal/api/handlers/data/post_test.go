@@ -43,12 +43,8 @@ func TestPostErrorCreatingData(t *testing.T) {
 
 	dataJSON, _ := json.Marshal(models.Data{
 		ID:          1,
-		DeviceID:    "device1",
-		DeviceName:  "device1",
-		Value:       1.0,
-		Type:        "type1",
-		DateTime:    "2021-01-01 00:00:00",
-		Description: "description1",
+		Message:    "test message ",
+		
 	})
 
 	req.Body = io.NopCloser(strings.NewReader(string(dataJSON)))
@@ -75,12 +71,8 @@ func TestPostSuccessful(t *testing.T) {
 
 	dataJSON, _ := json.Marshal(models.Data{
 		ID:          1,
-		DeviceID:    "device1",
-		DeviceName:  "device1",
-		Value:       1.0,
-		Type:        "type1",
-		DateTime:    "2021-01-01 00:00:00",
-		Description: "description1",
+		Message:    "Test  message",
+		
 	})
 
 	// * Create new reader with the JSON payload

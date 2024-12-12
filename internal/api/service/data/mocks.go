@@ -12,21 +12,13 @@ func (m *MockDataServiceSuccessful) ReadMany(page int, rowsPerPage int, ctx cont
 	return []*models.Data{
 		{
 			ID:          1,
-			DeviceID:    "device1",
-			DeviceName:  "device1",
-			Value:       1.0,
-			Type:        "type1",
-			DateTime:    "2021-01-01 00:00:00",
-			Description: "description1",
+			Message:    "Test message",
+			
 		},
 		{
 			ID:          2,
-			DeviceID:    "device2",
-			DeviceName:  "device2",
-			Value:       2.0,
-			Type:        "type2",
-			DateTime:    "2021-01-01 00:00:00",
-			Description: "description2",
+			Message:    "Test message 2",
+			
 		},
 	}, nil
 }
@@ -34,12 +26,8 @@ func (m *MockDataServiceSuccessful) ReadMany(page int, rowsPerPage int, ctx cont
 func (m *MockDataServiceSuccessful) ReadOne(id int, ctx context.Context) (*models.Data, error) {
 	return &models.Data{
 		ID:          1,
-		DeviceID:    "device1",
-		DeviceName:  "device1",
-		Value:       1.0,
-		Type:        "type1",
-		DateTime:    "2021-01-01 00:00:00",
-		Description: "description1",
+		Message:    "Test message",
+		
 	}, nil
 }
 

@@ -3,7 +3,7 @@ package data
 import (
 	"context"
 	"goapi/internal/api/repository/models"
-	"time"
+	//"time"
 )
 
 // * Implementation of DataService for SQLite database *
@@ -58,22 +58,10 @@ func (ds *DataServiceSQLite) Delete(data *models.Data, ctx context.Context) (int
 
 func (ds *DataServiceSQLite) ValidateData(data *models.Data) error {
 	var errMsg string
-	if data.DeviceID == "" || len(data.DeviceID) > 50 {
-		errMsg += "DeviceID is required and must be less than 50 characters. "
+	if data.Message == "" || len(data.Message) > 50 {
+		errMsg += "Message is required and must be less than 50 characters. "
 	}
-	if len(data.DeviceName) > 50 {
-		errMsg += "DeviceName must be less than 50 characters. "
-	}
-	if len(data.Type) > 20 {
-		errMsg += "Type must be less than 20 characters. "
-	}
-	if len(data.Description) > 100 {
-		errMsg += "Description must be less than 100 characters. "
-	}
-	_, err := time.Parse("2006-01-02T15:04:05Z", data.DateTime)
-	if err != nil {
-		errMsg += "DateTime must be in the format: 2021-01-01T12:00:00Z. "
-	}
+	
 	if errMsg != "" {
 		return DataError{Message: errMsg}
 	}
